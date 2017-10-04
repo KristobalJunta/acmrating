@@ -25,7 +25,9 @@ SECRET_KEY = '2i9sf$ri42ig0%m8^5yz^j$$e2-1o$n$0am&@=6o=h=m6q1ium'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'junta.kristobal.0x2a-dc.com',
+]
 
 
 # Application definition
