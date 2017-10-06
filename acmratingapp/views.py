@@ -36,7 +36,7 @@ class CsvView(generic.View):
         for row in rows:
             data_row = []
             for cell in row.find_all('td'):
-                data_row.append(' '.join(list(map(lambda x: strip_tags(str(x)), cell.contents))))
+                data_row.append(' '.join(list(map(lambda x: strip_tags(str(x)), cell.contents))).replace(u"\u00A0", ''))
             if len(data_row[0]) == 0:
                 continue
             for i in range(0, len(data_row)):
