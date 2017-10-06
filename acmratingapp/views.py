@@ -13,10 +13,11 @@ from io import StringIO
 
 
 class CsvView(generic.View):
-    def get(self, request, *args, **kwargs):
 
-        page = 'http://olymp.sumdu.edu.ua:8080/tren.php'
-        content = requests.get(page).content
+    page_url = 'http://olymp.sumdu.edu.ua:8080/tren.php'
+
+    def get(self, request, *args, **kwargs):
+        content = requests.get(self.page_url).content
 
         soup = BeautifulSoup(content, 'html.parser')
 
@@ -29,19 +30,20 @@ class CsvView(generic.View):
         rows = table.find_all('tr')[1:]
         data_rows = []
 
-        fields = [
-            'Place', 'User',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
-            'Region', 'Total', 'Penalty'
-        ]
+        # fields
+        # 'Place', 'User', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'Region', 'Total', 'Penalty'
 
         for row in rows:
             data_row = []
             for cell in row.find_all('td'):
                 data_row.append(' '.join(list(map(lambda x: strip_tags(str(x)), cell.contents))))
+            if len(data_row[0]) == 0:
+                continue
+            for i in range(0, len(data_row)):
+                if len(data_row[i]) == 0:
+                    data_row[i] = '-'
             data_rows.append(data_row)
 
-        # print(data_rows)
         out = StringIO()
         wr = csv.writer(out)
         for row in data_rows:
