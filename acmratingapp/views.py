@@ -14,7 +14,8 @@ from io import StringIO
 
 class CsvView(generic.View):
 
-    page_url = 'http://olymp.sumdu.edu.ua:8080/tren.php'
+    # page_url = 'http://olymp.sumdu.edu.ua:8080/tren.php'
+    page_url='http://ejudge.sumdu.edu.ua/cgi-bin/new-client?SID=003d5702c5891776&action=94'
 
     def get(self, request, *args, **kwargs):
         content = requests.get(self.page_url).content
