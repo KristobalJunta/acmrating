@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'junta.kristobal.0x2a-dc.com',
+    'kristobaljunta.me',
+    '*.kristobaljunta.me',
 ]
 
 
