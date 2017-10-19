@@ -20,4 +20,5 @@ from acmratingapp.views import CsvView
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', CsvView.as_view(), name='csv_view'),
+    url(r'^csv/$', CsvView.as_view(), name='csv_view'),
 ]
