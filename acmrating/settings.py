@@ -26,6 +26,7 @@ SECRET_KEY = '2i9sf$ri42ig0%m8^5yz^j$$e2-1o$n$0am&@=6o=h=m6q1ium'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     'junta.kristobal.0x2a-dc.com',
     'kristobaljunta.me',
     '*.kristobaljunta.me',
