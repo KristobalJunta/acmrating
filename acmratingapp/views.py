@@ -42,7 +42,8 @@ class CsvView(generic.View):
             if table:
                 table = table[0]
             else:
-                raise Exception('No table found')
+                # raise Exception('No table found')
+                return HttpResponse('No table found.')
 
             rows = table.find_all('tr')[1:]
             data_rows = []
