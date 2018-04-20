@@ -1,8 +1,10 @@
 .idea/
 env/
+logs/*
+
+!logs/.gitkeep
 *.pyc
 *.swp
-logs/*
-!logs/.gitkeep
 db.sqlite3
+acmrating.db
 config.py

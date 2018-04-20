@@ -3,18 +3,64 @@
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask
-from flask import make_response
+from flask import make_response, render_template, render_template_string, request, abort
 from io import StringIO
 import csv
 from config import config
+import sqlite3
+import random
+import string
+
+
+conn = sqlite3.connect(config.get('db'))
+cur = conn.cursor()
+
+
+def get_short_code(length=6):
+    char = string.ascii_uppercase + string.digits + string.ascii_lowercase
+
+    cur.execute('SELECT uuid from urls;')
+    uuids = cur.fetchall()
+    uuids = [x[0] for x in uuids]
+
+    # if the randomly generated short_id is used then generate next
+    while True:
+        short_id = ''.join(random.choice(char) for x in range(length))
+        if short_id not in uuids:
+            return short_id
 
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    page_url = config.get('url')
+@app.route('/', methods=['GET'])
+def show_form():
+    return render_template('index.html')
+
+
+@app.route('/', methods=['POST'])
+def save_url():
+    link = request.form['url']
+    uuid = get_short_code()
+
+    cur.execute("INSERT INTO urls(uuid,link) VALUES(?,?)", (uuid, link))
+    conn.commit()
+
+    url = "http://{}/{}".format(request.host, uuid)
+    response = "<a href='{}'>{}</a>".format(url, url)
+    return render_template_string(response)
+
+
+@app.route('/<uuid>', methods=['GET'])
+def show_table(uuid):
+    cur.execute("SELECT link FROM urls WHERE uuid='{}';".format(uuid))
+    links = cur.fetchall()
+    if len(links) > 0:
+        page_url = links[0][0]
+    else:
+        page_url = ''
+        abort(404)
+
     content = requests.get(page_url).content
 
     soup = BeautifulSoup(content, 'html.parser')
