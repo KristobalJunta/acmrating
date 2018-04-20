@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask
-from flask import request, abort, make_response, jsonify
+from flask import make_response
 from io import StringIO
 import csv
 from config import config
@@ -34,7 +34,10 @@ def index():
     for row in rows:
         data_row = []
         for cell in row.find_all('td'):
-            data_row.append(' '.join(list(map(lambda x: BeautifulSoup(str(x)).get_text(), cell.contents))).strip())
+            data_row.append(' '.join(list(map(
+                lambda x: BeautifulSoup(str(x), 'html.parser').get_text(),
+                cell.contents))).strip()
+            )
         if len(data_row[0]) == 0:
             continue
         for i in range(0, len(data_row)):
