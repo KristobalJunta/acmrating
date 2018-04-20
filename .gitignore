@@ -5,3 +5,4 @@ env/
 logs/*
 !logs/.gitkeep
 db.sqlite3
+config.py
