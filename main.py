@@ -12,7 +12,7 @@ import random
 import string
 
 
-conn = sqlite3.connect(config.get('db'))
+conn = sqlite3.connect(config.get('db'), check_same_thread=False)
 cur = conn.cursor()
 
 
