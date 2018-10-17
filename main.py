@@ -131,9 +131,9 @@ def show_csv(uuid):
         wr.writerow(row)
 
     response = make_response(out.getvalue())
+    response.mimetype = 'text/csv'
     response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Content-type', 'text/csv')
-    response.headers.add('Content-disposition', 'attachment;filename={}.csv'.format(uuid))
+    response.headers.add('Content-disposition', 'attachment; filename={}.csv'.format(uuid))
     return response
 
 
