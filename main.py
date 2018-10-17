@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup
 from flask import Flask
-from flask import make_response, render_template, render_template_string, request, abort
+from flask import make_response, render_template, request, abort
 from io import StringIO
 import csv
 from config import config
@@ -43,9 +43,6 @@ def get_rating_data(page_url):
 
     rows = table.find_all('tr')[1:]
     data_rows = []
-
-    # fields
-    # 'Place', 'User', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'Region', 'Total', 'Penalty'
 
     for row in rows:
         data_row = []
@@ -148,7 +145,7 @@ def show_table(uuid):
     rating_data = get_rating_data(page_url)
     columns = get_header(rating_data)
 
-    region = link = request.args.get('region')
+    region = request.args.get('region')
     if region:
         rating_data = filter_rating(rating_data, region)
 
