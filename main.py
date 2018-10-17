@@ -117,6 +117,9 @@ def show_csv(uuid):
 
     rating_data = get_rating_data(page_url)
     header = get_header(rating_data)
+    region = request.args.get('region')
+    if region:
+        rating_data = filter_rating(rating_data, region)
 
     out = StringIO()
     wr = csv.writer(out)
