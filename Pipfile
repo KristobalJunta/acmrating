@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+"beautifulsoup4" = "*"
+"bs4" = "*"
+"certifi" = "*"
+"chardet" = "*"
+"click" = "*"
+"idna" = "*"
+"itsdangerous" = "*"
+"requests" = "*"
+"urllib3" = "*"
+"Flask" = "*"
+"Jinja2" = "*"
+"MarkupSafe" = "*"
+"uWSGI" = "*"
+"Werkzeug" = "*"
+
+[requires]
+python_version = "3.6"
