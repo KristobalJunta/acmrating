@@ -89,7 +89,9 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def show_form():
-    return render_template('index.html')
+    cur.execute("SELECT * FROM urls;")
+    links = cur.fetchall()
+    return render_template('index.html', links=links)
 
 
 @app.route('/', methods=['POST'])

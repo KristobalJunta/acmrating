@@ -16,5 +16,21 @@
         <input type="url" name="url" placeholder="An URL...">
         <button type="submit">Send</button>
     </form>
+
+    <table border="1" cellspacing="0" style="margin: 40px 0 0;">
+        <thead>
+            <tr>
+                <th colspan="2">All links</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for link in links %}
+            <tr>
+                <td>{{ link[1] }}</td>
+                <td><a href="{{ request.host }}/{{ link[0] }}" target="_blank">{{ request.host }}/{{ link[0] }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
