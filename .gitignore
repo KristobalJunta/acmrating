@@ -1,10 +1,16 @@
-.idea/
-env/
-logs/*
+.idea
+.vscode
 
+env
+.venv
+
+logs/*
 !logs/.gitkeep
+
+__pycache__
 *.pyc
 *.swp
+
 db.sqlite3
 acmrating.db
 config.py
