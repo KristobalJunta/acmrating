@@ -11,6 +11,5 @@ __pycache__
 *.pyc
 *.swp
 
-db.sqlite3
 acmrating.db
 config.py
